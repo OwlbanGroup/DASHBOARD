@@ -1,9 +1,9 @@
 {
   "dashboard": {
     "id": null,
-    "uid": "cpu-metrics-dashboard",
-    "title": "CPU Metrics Dashboard",
-    "tags": ["cpu", "metrics"],
+    "uid": "financial-monitoring-dashboard",
+    "title": "Financial & System Monitoring Dashboard",
+    "tags": ["financial", "banking", "cpu", "monitoring", "plaid"],
     "timezone": "browser",
     "schemaVersion": 16,
     "version": 0,
@@ -17,8 +17,218 @@
           "x": 0,
           "y": 0
         },
+        "type": "stat",
+        "title": "Total Account Balance",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "plaid_account_balance_total"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "currencyUSD",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": null,
+                  "color": "red"
+                },
+                {
+                  "value": 1000,
+                  "color": "orange"
+                },
+                {
+                  "value": 5000,
+                  "color": "green"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "type": "stat",
+        "title": "Monthly Transactions",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "plaid_transactions_monthly_count"
+          }
+        ],
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": null,
+                  "color": "green"
+                },
+                {
+                  "value": 50,
+                  "color": "orange"
+                },
+                {
+                  "value": 100,
+                  "color": "red"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": 3,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
         "type": "graph",
-        "title": "CPU Usage Percentage",
+        "title": "Account Balances Over Time",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "plaid_account_balances"
+          }
+        ],
+        "xaxis": {
+          "show": true,
+          "mode": "time"
+        },
+        "yaxes": [
+          {
+            "label": "Balance ($)",
+            "show": true,
+            "format": "currencyUSD"
+          },
+          {
+            "show": true
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "type": "graph",
+        "title": "Transaction Volume",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "plaid_transaction_amounts"
+          }
+        ],
+        "xaxis": {
+          "show": true,
+          "mode": "time"
+        },
+        "yaxes": [
+          {
+            "label": "Amount ($)",
+            "show": true,
+            "format": "currencyUSD"
+          },
+          {
+            "show": true
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "type": "table",
+        "title": "Recent Transactions",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "plaid_recent_transactions"
+          }
+        ],
+        "options": {
+          "showHeader": true
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            }
+          }
+        }
+      },
+      {
+        "id": 6,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "type": "table",
+        "title": "Account Summary",
+        "targets": [
+          {
+            "refId": "A",
+            "target": "plaid_accounts_summary"
+          }
+        ],
+        "options": {
+          "showHeader": true
+        },
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "auto",
+              "displayMode": "auto"
+            }
+          }
+        }
+      },
+      {
+        "id": 7,
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "type": "graph",
+        "title": "CPU Usage %",
         "targets": [
           {
             "refId": "A",
@@ -41,15 +251,15 @@
         ]
       },
       {
-        "id": 2,
+        "id": 8,
         "gridPos": {
           "h": 8,
           "w": 12,
           "x": 12,
-          "y": 0
+          "y": 24
         },
         "type": "graph",
-        "title": "CPU Load Average",
+        "title": "System Load Average",
         "targets": [
           {
             "refId": "A",
@@ -72,235 +282,19 @@
         ]
       },
       {
-        "id": 3,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 8
-        },
-        "type": "graph",
-        "title": "CPU Cores Usage",
-        "targets": [
-          {
-            "refId": "A",
-            "target": "cpu_cores_usage"
-          }
-        ],
-        "xaxis": {
-          "show": true,
-          "mode": "time"
-        },
-        "yaxes": [
-          {
-            "label": "Cores",
-            "show": true,
-            "format": "none"
-          },
-          {
-            "show": true
-          }
-        ]
-      },
-      {
-        "id": 4,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 8
-        },
-        "type": "graph",
-        "title": "CPU Temperature",
-        "targets": [
-          {
-            "refId": "A",
-            "target": "cpu_temperature"
-          }
-        ],
-        "xaxis": {
-          "show": true,
-          "mode": "time"
-        },
-        "yaxes": [
-          {
-            "label": "Temperature (°C)",
-            "show": true,
-            "format": "celsius"
-          },
-          {
-            "show": true
-          }
-        ]
-      },
-      {
-        "id": 5,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 0,
-          "y": 16
-        },
-        "type": "graph",
-        "title": "CPU Frequency",
-        "targets": [
-          {
-            "refId": "A",
-            "target": "cpu_frequency"
-          }
-        ],
-        "xaxis": {
-          "show": true,
-          "mode": "time"
-        },
-        "yaxes": [
-          {
-            "label": "Frequency (MHz)",
-            "show": true,
-            "format": "hertz"
-          },
-          {
-            "show": true
-          }
-        ]
-      },
-      {
-        "id": 6,
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 16
-        },
-        "type": "graph",
-        "title": "CPU Interrupts",
-        "targets": [
-          {
-            "refId": "A",
-            "target": "cpu_interrupts"
-          }
-        ],
-        "xaxis": {
-          "show": true,
-          "mode": "time"
-        },
-        "yaxes": [
-          {
-            "label": "Interrupts",
-            "show": true,
-            "format": "none"
-          },
-          {
-            "show": true
-          }
-        ]
-      },
-      {
-        "id": 7,
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 0,
-          "y": 24
-        },
-        "type": "stat",
-        "title": "CPU Context Switches",
-        "targets": [
-          {
-            "refId": "A",
-            "target": "cpu_context_switches"
-          }
-        ],
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "unit": "none",
-            "color": {
-              "mode": "thresholds"
-            },
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "value": null,
-                  "color": "green"
-                },
-                {
-                  "value": 100000,
-                  "color": "orange"
-                },
-                {
-                  "value": 500000,
-                  "color": "red"
-                }
-              ]
-            }
-          }
-        }
-      },
-      {
-        "id": 8,
-        "gridPos": {
-          "h": 8,
-          "w": 8,
-          "x": 8,
-          "y": 24
-        },
-        "type": "stat",
-        "title": "CPU Idle Time",
-        "targets": [
-          {
-            "refId": "A",
-            "target": "cpu_idle_time"
-          }
-        ],
-        "options": {
-          "colorMode": "value",
-          "graphMode": "area"
-        },
-        "fieldConfig": {
-          "defaults": {
-            "unit": "percent",
-            "color": {
-              "mode": "thresholds"
-            },
-            "thresholds": {
-              "mode": "absolute",
-              "steps": [
-                {
-                  "value": null,
-                  "color": "red"
-                },
-                {
-                  "value": 20,
-                  "color": "orange"
-                },
-                {
-                  "value": 50,
-                  "color": "green"
-                }
-              ]
-            }
-          }
-        }
-      },
-      {
         "id": 9,
         "gridPos": {
           "h": 8,
-          "w": 8,
-          "x": 16,
-          "y": 24
+          "w": 12,
+          "x": 0,
+          "y": 32
         },
         "type": "stat",
-        "title": "CPU System Time",
+        "title": "Memory Usage",
         "targets": [
           {
             "refId": "A",
-            "target": "cpu_system_time"
+            "target": "memory_usage_percent"
           }
         ],
         "options": {
@@ -338,25 +332,43 @@
         "gridPos": {
           "h": 8,
           "w": 12,
-          "x": 0,
+          "x": 12,
           "y": 32
         },
-        "type": "table",
-        "title": "Recent Log Entries",
+        "type": "stat",
+        "title": "Disk Usage",
         "targets": [
           {
             "refId": "A",
-            "target": "logs_recent"
+            "target": "disk_usage_percent"
           }
         ],
         "options": {
-          "showHeader": true
+          "colorMode": "value",
+          "graphMode": "area"
         },
         "fieldConfig": {
           "defaults": {
-            "custom": {
-              "align": "auto",
-              "displayMode": "auto"
+            "unit": "percent",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "value": null,
+                  "color": "green"
+                },
+                {
+                  "value": 70,
+                  "color": "orange"
+                },
+                {
+                  "value": 90,
+                  "color": "red"
+                }
+              ]
             }
           }
         }
@@ -366,15 +378,15 @@
         "gridPos": {
           "h": 8,
           "w": 12,
-          "x": 12,
-          "y": 32
+          "x": 0,
+          "y": 40
         },
         "type": "table",
-        "title": "Recent Traces",
+        "title": "System Logs",
         "targets": [
           {
             "refId": "A",
-            "target": "traces_recent"
+            "target": "system_logs_recent"
           }
         ],
         "options": {
@@ -393,16 +405,16 @@
         "id": 12,
         "gridPos": {
           "h": 8,
-          "w": 24,
-          "x": 0,
+          "w": 12,
+          "x": 12,
           "y": 40
         },
         "type": "graph",
-        "title": "CPU Metrics Overview",
+        "title": "Network I/O",
         "targets": [
           {
             "refId": "A",
-            "target": "cpu_metrics_overview"
+            "target": "network_io"
           }
         ],
         "xaxis": {
@@ -411,8 +423,9 @@
         },
         "yaxes": [
           {
-            "label": "Value",
-            "show": true
+            "label": "Bytes/sec",
+            "show": true,
+            "format": "Bps"
           },
           {
             "show": true

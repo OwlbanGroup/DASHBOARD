@@ -1,0 +1,22 @@
+apiVersion: provisioning.grafana.app/v0alpha1
+kind: Repository
+metadata:
+  name: dashboard-repo
+spec:
+  title: Dashboard Repository
+  type: github
+  github:
+    url: https://github.com/ESADavid/DASHBOARD.git
+    branch: main
+    path: grafana/
+    generateDashboardPreviews: true
+  sync:
+    enabled: true
+    intervalSeconds: 60
+    target: folder
+  workflows:
+    - write
+    - branch
+secure:
+  token:
+    create: <GITHUB_PAT>

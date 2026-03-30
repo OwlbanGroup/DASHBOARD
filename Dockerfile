@@ -21,7 +21,7 @@ COPY grafana/provisioning/plugins/plugins.yml /etc/grafana/provisioning/plugins/
 COPY dashboard.json /var/lib/grafana/dashboards/
 
 # Copy custom configuration if needed
-# COPY grafana/grafana.ini /etc/grafana/grafana.ini
+COPY grafana/grafana.ini /etc/grafana/grafana.ini
 
 # Expose port 3000 (Grafana default)
 EXPOSE 3000
