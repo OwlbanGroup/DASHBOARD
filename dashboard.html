@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Activity Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .dashboard-header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .panels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .panel-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #4a5568;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: 700;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .stat-value.green {
+            color: #48bb78;
+        }
+
+        .stat-value.yellow {
+            color: #ed8936;
+        }
+
+        .stat-value.red {
+            color: #f56565;
+        }
+
+        .gauge-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .alert-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .alert-badge.active {
+            background: #fed7d7;
+            color: #c53030;
+        }
+
+        .alert-badge.normal {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .metric-label {
+            text-align: center;
+            color: #718096;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .threshold-indicator {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+            font-size: 0.85em;
+        }
+
+        .threshold-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .threshold-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+
+        .wide-panel {
+            grid-column: 1 / -1;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9em;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 1.8em;
+            }
+
+            .panels-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-value {
+                font-size: 2.5em;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>User Activity Dashboard</h1>
+            <p>Real-time monitoring and analytics</p>
+        </div>
+
+        <div class="panels-grid">
+            <!-- Daily Active Users Panel -->
+            <div class="panel">
+                <div class="panel-title">Daily Active Users (DAU)</div>
+                <div class="stat-value" id="dau-value">--</div>
+                <div class="metric-label">Active users in last 24 hours</div>
+                <div class="threshold-indicator">
+                    <div class="threshold-item">
+                        <div class="threshold-color" style="background: #f56565;"></div>
+                        <span>&lt; 5,000</span>
+                    </div>
+                    <div class="threshold-item">
+                        <div class="threshold-color" style="background: #ed8936;"></div>
+                        <span>5K - 10K</span>
+                    </div>
+                    <div class="threshold-item">
+                        <div class="threshold-color" style="background: #48bb78;"></div>
+                        <span>&gt; 10,000</span>
+                    </div>
+                </div>
+                <div class="alert-badge" id="dau-alert">Normal</div>
+            </div>
+
+            <!-- Weekly Active Users Panel -->
+            <div class="panel">
+                <div class="panel-title">Weekly Active Users (WAU)</div>
+                <div class="stat-value green" id="wau-value">--</div>
+                <div class="metric-label">Active users in last 7 days</div>
+            </div>
+
+            <!-- DAU/WAU Stickiness Ratio Panel -->
+            <div class="panel">
+                <div class="panel-title">DAU/WAU Stickiness Ratio</div>
+                <div class="gauge-container">
+                    <canvas id="stickinessGauge"></canvas>
+                </div>
+                <div class="metric-label">User engagement quality metric</div>
+                <div class="threshold-indicator">
+                    <div class="threshold-item">
+                        <div class="threshold-color" style="background: #f56565;"></div>
+                        <span>&lt; 0.3</span>
+                    </div>
+                    <div class="threshold-item">
+                        <div class="threshold-color" style="background: #ed8936;"></div>
+                        <span>0.3 - 0.5</span>
+                    </div>
+                    <div class="threshold-item">
+                        <div class="threshold-color" style="background: #48bb78;"></div>
+                        <span>&gt; 0.5</span>
+                    </div>
+                </div>
+                <div class="alert-badge" id="stickiness-alert">Normal</div>
+            </div>
+
+            <!-- User Actions Panel -->
+            <div class="panel">
+                <div class="panel-title">User Actions</div>
+                <div class="stat-value green" id="actions-value">--</div>
+                <div class="metric-label">Activity ratio (DAU/WAU)</div>
+            </div>
+
+            <!-- Trendline Panel -->
+            <div class="panel wide-panel">
+                <div class="panel-title">Active Users Over Time</div>
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="last-updated">
+            Last updated: <span id="last-update-time">--</span>
+        </div>
+    </div>
+
+    <script>
+        // Simulated data generation (replace with actual API calls)
+        function generateMockData() {
+            const now = new Date();
+
+            // DAU - random between 3000 and 15000
+            const dau = Math.floor(Math.random() * 12000) + 3000;
+
+            // WAU - should be higher than DAU
+            const wau = Math.floor(dau * (1.5 + Math.random() * 2));
+
+            // Stickiness ratio
+            const stickiness = (dau / wau).toFixed(2);
+
+            // User actions ratio
+            const actionsRatio = stickiness;
+
+            return {
+                dau,
+                wau,
+                stickiness: parseFloat(stickiness),
+                actionsRatio: parseFloat(actionsRatio),
+                timestamp: now
+            };
+        }
+
+        // Generate time series data for the trend chart
+        function generateTrendData() {
+            const data = [];
+            const now = new Date();
+
+            for (let i = 30; i >= 0; i--) {
+                const date = new Date(now);
+                date.setDate(date.getDate() - i);
+
+                const dau = Math.floor(Math.random() * 5000) + 7000 + (30 - i) * 100;
+                const wau = Math.floor(dau * (2 + Math.random() * 0.5));
+
+                data.push({
+                    date: date.toLocaleDateString(),
+                    dau,
+                    wau
+                });
+            }
+
+            return data;
+        }
+
+        // Update DAU panel
+        function updateDAU(value) {
+            const element = document.getElementById('dau-value');
+            const alertBadge = document.getElementById('dau-alert');
+
+            element.textContent = value.toLocaleString();
+
+            if (value < 5000) {
+                element.className = 'stat-value red';
+                alertBadge.className = 'alert-badge active';
+                alertBadge.textContent = 'Alert: DAU Drop';
+            } else if (value < 10000) {
+                element.className = 'stat-value yellow';
+                alertBadge.className = 'alert-badge normal';
+                alertBadge.textContent = 'Normal';
+            } else {
+                element.className = 'stat-value green';
+                alertBadge.className = 'alert-badge normal';
+                alertBadge.textContent = 'Healthy';
+            }
+        }
+
+        // Update WAU panel
+        function updateWAU(value) {
+            const element = document.getElementById('wau-value');
+            element.textContent = value.toLocaleString();
+        }
+
+        // Update User Actions panel
+        function updateActions(value) {
+            const element = document.getElementById('actions-value');
+            element.textContent = (value * 100).toFixed(1) + '%';
+        }
+
+        // Create stickiness gauge
+        let stickinessChart = null;
+        function updateStickinessGauge(value) {
+            const ctx = document.getElementById('stickinessGauge').getContext('2d');
+            const alertBadge = document.getElementById('stickiness-alert');
+
+            let color;
+            if (value < 0.25) {
+                alertBadge.className = 'alert-badge active';
+                alertBadge.textContent = 'Alert: Low Stickiness';
+                color = '#f56565';
+            } else if (value < 0.3) {
+                alertBadge.className = 'alert-badge normal';
+                alertBadge.textContent = 'Warning';
+                color = '#f56565';
+            } else if (value < 0.5) {
+                alertBadge.className = 'alert-badge normal';
+                alertBadge.textContent = 'Normal';
+                color = '#ed8936';
+            } else {
+                alertBadge.className = 'alert-badge normal';
+                alertBadge.textContent = 'Excellent';
+                color = '#48bb78';
+            }
+
+            if (stickinessChart) {
+                stickinessChart.destroy();
+            }
+
+            stickinessChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [value, 1 - value],
+                        backgroundColor: [color, '#e2e8f0'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'centerText',
+                    beforeDraw: function(chart) {
+                        const width = chart.width;
+                        const height = chart.height;
+                        const ctx = chart.ctx;
+                        ctx.restore();
+                        const fontSize = (height / 100).toFixed(2);
+                        ctx.font = fontSize + "em sans-serif";
+                        ctx.textBaseline = "middle";
+                        const text = (value * 100).toFixed(1) + "%";
+                        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+                        const textY = height / 2;
+                        ctx.fillStyle = color;
+                        ctx.fillText(text, textX, textY);
+                        ctx.save();
+                    }
+                }]
+            });
+        }
+
+        // Create trend chart
+        let trendChart = null;
+        function updateTrendChart() {
+            const data = generateTrendData();
+            const ctx = document.getElementById('trendChart').getContext('2d');
+
+            if (trendChart) {
+                trendChart.destroy();
+            }
+
+            trendChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.date),
+                    datasets: [
+                        {
+                            label: 'DAU',
+                            data: data.map(d => d.dau),
+                            borderColor: '#667eea',
+                            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3
+                        },
+                        {
+                            label: 'WAU',
+                            data: data.map(d => d.wau),
+                            borderColor: '#48bb78',
+                            backgroundColor: 'rgba(72, 187, 120, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                },
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update all panels
+        function updateDashboard() {
+            const data = generateMockData();
+
+            updateDAU(data.dau);
+            updateWAU(data.wau);
+            updateStickinessGauge(data.stickiness);
+            updateActions(data.actionsRatio);
+
+            document.getElementById('last-update-time').textContent =
+                data.timestamp.toLocaleTimeString();
+        }
+
+        // Initialize dashboard
+        function initDashboard() {
+            updateDashboard();
+            updateTrendChart();
+
+            // Refresh every 5 seconds
+            setInterval(updateDashboard, 5000);
+
+            // Refresh trend chart every 30 seconds
+            setInterval(updateTrendChart, 30000);
+        }
+
+        // Start dashboard when page loads
+        window.addEventListener('load', initDashboard);
+    </script>
+</body>
+</html>
