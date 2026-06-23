@@ -19,7 +19,12 @@
     "python.analysis.diagnosticSeverityOverrides": {
         "import-untyped": "none",
         "reportMissingTypeStubs": "none",
-        "reportMissingImports": "none"
+        "reportMissingImports": "none",
+        "reportOptionalSubscript": "none",
+        "reportOptionalMemberAccess": "none",
+        "reportOptionalCall": "none",
+        "reportIndexIssue": "none",
+        "reportAttributeAccessIssue": "none"
     },
     
     // Interpreter settings

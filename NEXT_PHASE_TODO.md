@@ -67,8 +67,8 @@
   - [ ] Session management
   - [ ] Password hashing
 - [ ] API Security Enhancements
-  - [ ] Add rate limiting
-  - [ ] Implement request throttling
+  - [x] Add rate limiting (Node.js: 100 req/15min, Python: 100 req/min)
+  - [x] Implement request throttling (Configured)
   - [ ] Add API key validation
   - [x] CORS restrictions (Configured in Node.js backend)
 - [ ] Security Monitoring
