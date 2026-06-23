@@ -140,7 +140,7 @@ switch ($choice) {
         Write-Host "Quick Steps:" -ForegroundColor Yellow
         Write-Host "1. Go to https://render.com" -ForegroundColor White
         Write-Host "2. Sign up with GitHub" -ForegroundColor White
-        Write-Host "3. Click 'New +' → 'Web Service'" -ForegroundColor White
+Write-Host "3. Click New + then Web Service" -ForegroundColor White
         Write-Host "4. Select 'Deploy an existing image from a registry'" -ForegroundColor White
         Write-Host "5. Image URL: $DOCKER_IMAGE" -ForegroundColor White
         Write-Host "6. Name: $APP_NAME" -ForegroundColor White

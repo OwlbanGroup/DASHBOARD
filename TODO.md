@@ -21,7 +21,7 @@
 - [x] Update Prometheus configuration for node-exporter
 - [x] Add node-exporter to docker-compose (when monitoring stack deployed)
 - [x] Verify dashboard provisioning configuration
-- [ ] Deploy monitoring stack (Prometheus + Grafana + Node Exporter)
-- [ ] Start services and verify metrics collection
-- [ ] Import dashboard into Grafana
-- [ ] Test dashboard with real CPU metrics
+- [x] Deploy monitoring stack (Prometheus + Grafana + Node Exporter)
+- [x] Start services and verify metrics collection
+- [x] Import dashboard into Grafana
+- [x] Test dashboard with real CPU metrics
