@@ -26,22 +26,18 @@
       "settings": {
         "terminal.integrated.defaultProfile.linux": "bash",
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+"editor.defaultFormatter": "ms-python.black-formatter",
         "files.eol": "\n",
         "files.insertFinalNewline": true,
         "files.trimTrailingWhitespace": true
       },
       
-      // Add the IDs of extensions you want installed when the container is created.
+// Add the IDs of extensions you want installed when the container is created.
       "extensions": [
-        "ms-azuretools.vscode-docker",
-        "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint",
+        "docker.docker",
         "ms-vscode.makefile-tools",
         "redhat.vscode-yaml",
-        "streetsidesoftware.code-spell-checker",
-        "eamodio.gitlens",
-        "github.copilot",
+        "GitHub.copilot-chat",
         "ms-vscode-remote.remote-containers"
       ]
     }

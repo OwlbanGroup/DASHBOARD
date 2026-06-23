@@ -2,10 +2,10 @@ app = "banking-dashboard"
 primary_region = "iad"
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = "./quickstart/python/Dockerfile.dev"
 
 [http_service]
-  internal_port = 80
+  internal_port = 8000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
