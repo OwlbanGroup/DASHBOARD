@@ -1,0 +1,42 @@
+{
+    // Python analysis settings - align with pyproject.toml and mypy.ini
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImport": true,
+    "python.analysis.reportMissingImports": "none",
+    "python.analysis.reportMissingTypeStubs": "none",
+    "python.analysis.ignore": ["import-untyped"],
+    
+    // Pylint settings - use local config
+    "pylint.usePylintrc": true,
+    "pylint.path": ["quickstart/python/.pylintrc"],
+    
+    // Mypy settings - use local config
+    "mypy.configFile": "quickstart/python/mypy.ini",
+    "mypy.runTypeChecker": true,
+    
+    // Disable specific diagnostics that are false positives for Plaid SDK
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "import-untyped": "none",
+        "reportMissingTypeStubs": "none",
+        "reportMissingImports": "none"
+    },
+    
+    // Interpreter settings
+    "python.defaultInterpreterPath": "python",
+    "python.analysis.extraPaths": ["quickstart/python/stubs"],
+    
+    // Files to exclude from analysis
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.venv": true,
+        "**/*.pyc": true
+    },
+    
+    // Search settings
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/__pycache__": true,
+        "**/.venv": true
+    }
+}
