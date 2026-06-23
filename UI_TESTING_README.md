@@ -114,9 +114,9 @@ npm run test:report
 The tests are configured in `playwright.config.js`:
 
 | Setting | Value | Description |
-|---------|-------|------------|
+| --------- | ----- | ------------ |
 | testDir | ./public/tests | Test file location |
-| baseURL | http://localhost:3000 | Target application URL |
+| baseURL | <http://localhost:3000> | Target application URL |
 | retries | 2 (CI) / 0 (local) | Failed test retries |
 | workers | auto | Parallel test workers |
 | reporter | html, json, list | Report formats |
@@ -134,7 +134,7 @@ BASE_URL=http://localhost:8080 npm test
 
 ## Test File Structure
 
-```
+```text
 public/
 ├── tests/
 │   └── ui-tests.spec.js    # Main test file
@@ -152,7 +152,7 @@ public/
 
 ### Successful Test Run
 
-```
+```text
 ✓ 20 tests passed (30s)
 ```
 
@@ -242,7 +242,7 @@ jobs:
 ## Supported Browsers
 
 | Browser | Status |
-|---------|--------|
+| --------- | -------- |
 | Chrome/Chromium | ✅ Supported |
 | Firefox | ✅ Supported |
 | Safari/WebKit | ✅ Supported |
