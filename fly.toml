@@ -1,4 +1,4 @@
-app = "banking-dashboard"
+app = "owlban-group"
 primary_region = "iad"
 
 [build]
@@ -23,3 +23,6 @@ primary_region = "iad"
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 256
+
+[experimental]
+  allowed_public_ports = []

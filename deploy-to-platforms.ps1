@@ -8,7 +8,7 @@ Write-Host ""
 
 # Configuration
 $DOCKER_IMAGE = "owlbandocker/dashboard:latest"
-$APP_NAME = "banking-dashboard"
+$APP_NAME = "owlban-group"
 $FLY_REGION = "iad"  # Ashburn (US East) - matches fly.toml
 
 # Function to check if command exists

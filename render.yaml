@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: banking-dashboard
+    name: owlban-group
     runtime: docker
     dockerfilePath: ./quickstart/python/Dockerfile.dev
     dockerContext: .
