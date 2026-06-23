@@ -15,7 +15,7 @@
 - [x] Replace panel 12: CPU Metrics Overview (graph)
 - [x] Verify JSON structure and correctness
 
-# CPU Metrics Data Source Integration TODO
+## CPU Metrics Data Source Integration TODO
 
 - [x] Configure Grafana data source for Prometheus
 - [x] Update Prometheus configuration for node-exporter

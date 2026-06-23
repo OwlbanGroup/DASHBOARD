@@ -1,0 +1,39 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "Financial Dashboard with UI Testing",
+  "main": "index.js",
+  "scripts": {
+    "start": "node quickstart/node/index.js",
+    "dev": "node quickstart/node/index.js",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:install": "playwright install --with-deps",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile*'",
+    "test:ci": "playwright test --reporter=html,json",
+    "test:all": "playwright test --reporter=list",
+    "test:update-snapshots": "playwright test --update-snapshots"
+  },
+  "keywords": [
+    "dashboard",
+    "financial",
+    "ui-testing",
+    "playwright"
+  ],
+  "author": "Dashboard Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "playwright": "^1.48.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
