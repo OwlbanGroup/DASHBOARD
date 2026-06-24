@@ -1,27 +1,51 @@
-# CPU Metrics Dashboard Creation TODO
+# Automation Setup TODO - Option C
 
-- [x] Update dashboard metadata (title, uid, tags)
-- [x] Replace panel 1: CPU Usage Percentage (graph)
-- [x] Replace panel 2: CPU Load Average (graph)
-- [x] Replace panel 3: CPU Cores Usage (graph)
-- [x] Replace panel 4: CPU Temperature (stat)
-- [x] Replace panel 5: CPU Frequency (graph)
-- [x] Replace panel 6: CPU Interrupts (graph)
-- [x] Replace panel 7: CPU Context Switches (stat)
-- [x] Replace panel 8: CPU Idle Time (stat)
-- [x] Replace panel 9: CPU System Time (stat)
-- [x] Replace panel 10: CPU User Time (stat)
-- [x] Replace panel 11: Recent CPU Logs (table)
-- [x] Replace panel 12: CPU Metrics Overview (graph)
-- [x] Verify JSON structure and correctness
+**Date**: June 2025  
+**Objective**: Full automation setup (Docker Hub + GitHub Secrets)
 
-## CPU Metrics Data Source Integration TODO
+---
 
-- [x] Configure Grafana data source for Prometheus
-- [x] Update Prometheus configuration for node-exporter
-- [x] Add node-exporter to docker-compose (when monitoring stack deployed)
-- [x] Verify dashboard provisioning configuration
-- [x] Deploy monitoring stack (Prometheus + Grafana + Node Exporter)
-- [x] Start services and verify metrics collection
-- [x] Import dashboard into Grafana
-- [x] Test dashboard with real CPU metrics
+## Plan: Option C - Full Automation Setup
+
+### Step 1: Get Docker Hub Access Token (5 min)
+- [x] Go to https://hub.docker.com
+- [x] Navigate to Profile → Account Settings → Security
+- [x] Click "New Access Token"
+- [x] Name: "GitHub Actions DASHBOARD"
+- [x] Permissions: Read, Write, Delete
+- [x] Generate and COPY the token
+
+### Step 2: Configure GitHub Secrets (3 min)
+- [x] Go to: https://github.com/bizle/DASHBOARD/settings/secrets/actions
+- [x] Add DOCKER_USERNAME: owlbandocker
+- [x] Add DOCKER_PASSWORD: [Your Docker Hub token]
+
+### Step 3: Trigger Automated Deployment (5 min)
+- [ ] Run: git add . && git commit -m "Enable automated Docker Hub deployment"
+- [ ] Run: git push origin main
+- [ ] Monitor: https://github.com/bizle/DASHBOARD/actions
+
+### Step 4: Verify Workflow Success (5 min)
+- [ ] Check workflow runs
+- [ ] Verify image pushed to Docker Hub
+- [ ] Document results
+
+---
+
+## Execution Log
+
+### Step 1: Docker Hub Token
+- [x] Opened Docker Hub in browser (COMPLETED)
+
+### Step 2: GitHub Secrets Added
+- [x] Secrets configured by user
+
+### Step 3: Push Triggered
+- [ ] Pending execution
+
+### Step 4: Workflow Verified
+- [ ] Pending verification
+
+---
+
+## Status: IN PROGRESS - Step 3
