@@ -21,6 +21,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Set lowercase repo name
+        id: repo
+        run: |
+          echo "repo=${{ github.repository_owner }}/${{ github.repo }}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -35,8 +41,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ${{ steps.repo.outputs.repo }}:latest
+            ${{ steps.repo.outputs.repo }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -44,11 +50,6 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const pkg = await github.rest.packages.getPackage({
-              package_type: 'container',
-              owner: context.repo.owner,
-              package: context.repo.repo
-            });
             await github.rest.packages.updatePackage({
               package_type: 'container',
               owner: context.repo.owner,
