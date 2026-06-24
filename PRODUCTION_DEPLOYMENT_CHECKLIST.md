@@ -65,7 +65,7 @@ heroku config:set GF_SECURITY_ADMIN_USER=admin -a esaowl
 Add environment variables in Vercel dashboard:
 
 - PLAID_ENV=production
-- PLAID_CLIENT_ID=<from Plaid>
+- PLAID_CLIENT_ID=PLAID_CLIENT_ID_FROM_PLAID
 - PLAID_SECRET=PLAID_SECRET_FROM_DASHBOARD
 
 ---
