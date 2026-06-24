@@ -33,9 +33,13 @@ railway.json
 vercel.json
 .vercel
 
-# Old dashboard files
-dashboard.json
-dashboard.yml
+# Old dashboard files (keep dashboard.json for Docker builds)
+# dashboard.json
+# dashboard.yml
+
+# Include for Docker builds
+!dashboard.json
+!financial-dashboard.json
 
 # Scripts
 *.ps1

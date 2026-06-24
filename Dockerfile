@@ -24,7 +24,7 @@ COPY grafana/provisioning/dashboards/dashboards.yml /etc/grafana/provisioning/da
 COPY grafana/provisioning/plugins/plugins.yml /etc/grafana/provisioning/plugins/
 
 # Copy dashboard files
-COPY dashboard.json /var/lib/grafana/dashboards/
+COPY financial-dashboard.json /var/lib/grafana/dashboards/dashboard.json
 
 # Copy custom configuration if needed
 COPY grafana/grafana.ini /etc/grafana/grafana.ini

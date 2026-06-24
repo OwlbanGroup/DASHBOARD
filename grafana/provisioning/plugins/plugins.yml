@@ -1,0 +1,7 @@
+# Plugin provisioning configuration
+# This file can be used to pre-configure Grafana plugins
+# Currently using plugin installation via GF_INSTALL_PLUGINS env var
+
+plugins:
+  # Plugins are installed via environment variable GF_INSTALL_PLUGINS
+  # See Dockerfile for current plugin list
