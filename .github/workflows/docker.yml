@@ -24,7 +24,7 @@ jobs:
       - name: Set lowercase repo name
         id: repo
         run: |
-          echo "repo=${{ github.repository_owner }}/${{ github.repo }}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_OUTPUT
+          echo "repo=${{ github.repository }}" | tr '[:upper:]' '[:lower:]' >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Login to GitHub Container Registry
@@ -41,8 +41,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ steps.repo.outputs.repo }}:latest
-            ${{ steps.repo.outputs.repo }}:${{ github.sha }}
+            ghcr.io/${{ steps.repo.outputs.repo }}:latest
+            ghcr.io/${{ steps.repo.outputs.repo }}:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
