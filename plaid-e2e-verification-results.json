@@ -1,79 +1,173 @@
 ﻿{
-    "Passed":  0,
-    "Timestamp":  "2026-01-28 17:00:05",
+    "Passed":  12,
+    "Timestamp":  "2026-06-23 23:10:37",
     "TotalTests":  14,
-    "Failed":  14,
+    "Failed":  2,
     "Tests":  [
                   {
                       "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
+                      "Error":  "The remote server returned an error: (404) Not Found.",
                       "Name":  "Server Health Check"
                   },
                   {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Create Link Token - Holdings Corp"
+                      "Status":  "PASS",
+                      "Name":  "Create Link Token - Holdings Corp",
+                      "Response":  {
+                                       "link_token":  "link-sandbox-39e8af17-bad2-4636-b744-09adf3f2fe02"
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Create Link Token - LEEPYEAR 1 LLC",
+                      "Response":  {
+                                       "link_token":  "link-sandbox-9d73afca-e773-4511-b8f3-cd62b157563a"
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Exchange Public Token - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "public_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "aba24f33c08f02e"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Exchange Public Token - LEEPYEAR 1 LLC",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "public_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "a4bbb56853a7e58"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Get Accounts - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "1843dd756637d73"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Get Balance - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "bb3544924822d5f"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Get Transactions - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "247276ba7e17ba4"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Get Identity - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "af42fbf7aade8d9"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Get Auth Info - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "2758c6e7efacd85"
+                                                 }
+                                   }
+                  },
+                  {
+                      "Status":  "PASS",
+                      "Name":  "Get Holdings - Holdings Corp",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "09f9898609fc8d2"
+                                                 }
+                                   }
                   },
                   {
                       "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Create Link Token - LEEPYEAR 1 LLC"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Exchange Public Token - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Exchange Public Token - LEEPYEAR 1 LLC"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Accounts - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Balance - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Transactions - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Identity - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Auth Info - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Holdings - Holdings Corp"
-                  },
-                  {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
+                      "Error":  "The remote server returned an error: (404) Not Found.",
                       "Name":  "Get Investment Transactions"
                   },
                   {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Item Info"
+                      "Status":  "PASS",
+                      "Name":  "Get Item Info",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-request/#invalid_field",
+                                                     "error_code":  "INVALID_FIELD",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_REQUEST",
+                                                     "request_id":  "e80e1f1fbd43925"
+                                                 }
+                                   }
                   },
                   {
-                      "Status":  "FAIL",
-                      "Error":  "Unable to connect to the remote server",
-                      "Name":  "Get Assets Report"
+                      "Status":  "PASS",
+                      "Name":  "Get Assets Report",
+                      "Response":  {
+                                       "error":  {
+                                                     "display_message":  null,
+                                                     "documentation_url":  "https://plaid.com/docs/errors/invalid-input/#invalid_access_token",
+                                                     "error_code":  "INVALID_ACCESS_TOKEN",
+                                                     "error_message":  "access_token must be a non-empty string",
+                                                     "error_type":  "INVALID_INPUT",
+                                                     "request_id":  "206231f49d8fb1d"
+                                                 }
+                                   }
                   }
               ],
-    "SuccessRate":  0
+    "SuccessRate":  85.71
 }
