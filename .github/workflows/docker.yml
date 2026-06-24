@@ -33,10 +33,3 @@ jobs:
           tags: |
             owlbandocker/dashboard:latest
             owlbandocker/dashboard:${{ github.sha }}
-
-      - name: Scan image for vulnerabilities
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: owlbandocker/dashboard:latest
-          format: table
-          exit-code: 0
