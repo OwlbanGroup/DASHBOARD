@@ -1,16 +1,13 @@
-FROM grafana/grafana:latest
+FROM grafana/grafana:11.2.0-amd64
 
 # SECURITY HARDENING: Require password via environment variable
 # DO NOT set GF_SECURITY_ADMIN_PASSWORD directly - inject at runtime
-# Example: docker run -e GF_SECURITY_ADMIN_PASSWORD=$ADMIN_PASSWORD grafana:latest
+# Example: docker run -e GF_SECURITY_ADMIN_PASSWORD=$ADMIN_PASSWORD grafana:11.2.0-amd64
 
 # Disable user signup for production
 ENV GF_USERS_ALLOW_SIGN_UP=false
 ENV GF_INSTALL_PLUGINS=grafana-assistant-app,grafana-database-observability-app
 ENV GF_METRICS_ENABLED=true
-# Disable basic auth - use env var provider instead  
-ENV GF_AUTH_DISABLE_LOGIN_FORM=true
-ENV GF_AUTH_ANONYMOUS_ENABLED=false
 
 # Create directories for provisioning
 RUN mkdir -p /etc/grafana/provisioning/datasources \
